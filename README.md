@@ -54,7 +54,41 @@ flowchart TB
     class E review;
     class F output;
 ```
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontSize": "11px"
+  },
+  "flowchart": {
+    "nodeSpacing": 20,
+    "rankSpacing": 25,
+    "padding": 5
+  }
+}}%%
 
+flowchart TD
+
+    A["Technical Inputs<br/>Code changes • Notes • API specs • Existing docs"]
+    B["Context Preparation<br/>Extract facts • Organize sources • Retrieve context"]
+    C["AI Content Workflow<br/>Draft • Technical Review • Tone • Structure"]
+    D["Review-Ready Draft<br/>Sources • Flags • Version"]
+    E["Human Review<br/>Approve or Request Changes"]
+    F["Publishing Preparation<br/>Export approved content"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E -->|Changes requested| C
+    E -->|Approved| F
+
+    classDef stage fill:#EEF2FF,stroke:#6366F1,color:#1E1B4B,stroke-width:1px;
+    classDef review fill:#FEF3C7,stroke:#F59E0B,color:#78350F,stroke-width:1px;
+    classDef output fill:#ECFDF5,stroke:#10B981,color:#064E3B,stroke-width:1px;
+
+    class A,B,C stage;
+    class E review;
+    class D,F output;
 ### Typical input
 
 A content request can combine:
