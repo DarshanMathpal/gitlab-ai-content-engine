@@ -457,6 +457,10 @@ A team can therefore start with technical information that already exists and us
 
 ---
 
+## Screenshots
+
+---
+
 ## Development Notes
 
 The project is organized around a clear separation of responsibilities:
@@ -480,7 +484,7 @@ The project is being developed as a multi-agent AI documentation workflow with s
 
 ---
 
-## Contributors
+## Contributors ⭐
 
 This project was developed collaboratively by:
 
