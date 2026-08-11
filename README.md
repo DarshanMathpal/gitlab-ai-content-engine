@@ -54,6 +54,7 @@ flowchart TB
     class E review;
     class F output;
 ```
+```mermaid
 %%{init: {
   "theme": "base",
   "themeVariables": {
@@ -89,6 +90,8 @@ flowchart TD
     class A,B,C stage;
     class E review;
     class D,F output;
+```
+
 ### Typical input
 
 A content request can combine:
