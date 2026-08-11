@@ -122,6 +122,48 @@ flowchart TB
     class P output;
 ```
 
+```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontSize": "11px"
+  },
+  "flowchart": {
+    "nodeSpacing": 20,
+    "rankSpacing": 25,
+    "padding": 5
+  }
+}}%%
+
+flowchart TD
+
+    I["Input Analysis"]
+    C["Context Reader"]
+    W["Documentation Writer"]
+    R["Technical Reviewer"]
+    T["Tone Optimizer"]
+    S["Structure & Content Refinement"]
+    H["Human Review"]
+    P["Publishing Preparation"]
+
+    I --> C
+    C --> W
+    W --> R
+    R --> T
+    T --> S
+    S --> H
+    H -->|Revise| W
+    H -->|Approve| P
+
+    classDef stage fill:#EEF2FF,stroke:#6366F1,color:#1E1B4B,stroke-width:1px;
+    classDef review fill:#FEF3C7,stroke:#F59E0B,color:#78350F,stroke-width:1px;
+    classDef output fill:#ECFDF5,stroke:#10B981,color:#064E3B,stroke-width:1px;
+
+    class I,C,W,R,T,S stage;
+    class H review;
+    class P output;
+```
+
 | Stage | Responsibility |
 |---|---|
 | **Context Reader** | Understands the supplied material, extracts relevant facts, and identifies missing context. |
