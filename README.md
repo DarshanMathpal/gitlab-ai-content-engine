@@ -315,19 +315,20 @@ git clone <repository-url>
 cd gitlab-ai-content-engine
 ```
 
-### 2. Create the environment
+### 2. Create the backend environment
 
 Create and activate a Python virtual environment for the backend.
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+cd backend
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ### 3. Install backend dependencies
 
 ```bash
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 4. Configure environment variables
@@ -342,10 +343,20 @@ Add the required values for the project's LLM and database configuration.
 
 **Do not commit `.env` or API keys to GitHub.**
 
-### 5. Start the application
+### 5. Start the backend
 
-Start the backend and frontend using the project's configured development commands.
+```bash
+python3 -m uvicorn main:app --reload
+```
+### 6. Start the frontend
 
+Open a new terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
 > Keep the actual commands for each service in the project-specific setup documentation if the frontend/backend run independently.
 
 ---
