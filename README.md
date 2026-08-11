@@ -33,7 +33,7 @@ This project brings those inputs together and creates a controlled path from tec
 
 ## How it works
 
-```mermaid
+```
 flowchart LR
     A["Technical Inputs<br/>Code changes • Notes • API specs • Existing docs"]
     B["Context Preparation<br/>Extract facts • Organize sources • Retrieve context"]
