@@ -766,3 +766,406 @@ The project is being developed as a multi-agent AI documentation workflow with s
 **Technical Change → Context → AI Workflow → Human Review → Documentation**
 
 </p>
+
+
+
+# GitLab AI Content & Documentation Engine
+
+> **Turn technical changes into source-grounded, review-ready content through a multi-agent AI workflow.**
+
+<p align="center">
+  <img src="docs/readme_assets/banner.svg" alt="GitLab AI Content & Documentation Engine" width="900">
+</p>
+
+## Overview
+
+The **GitLab AI Content & Documentation Engine** helps transform technical inputs such as code changes, release notes, API specifications, issue context, and existing documentation into structured content drafts.
+
+Instead of asking one AI model to perform the entire task at once, the project separates the workflow into focused stages for **context understanding, drafting, technical review, tone refinement, content refinement, and human approval**.
+
+The goal is to reduce the effort required to create technical content while keeping the result **grounded in available source material and subject to human review**.
+
+### What it helps with
+
+- Turning technical changes into documentation drafts
+- Reusing relevant existing documentation and knowledge
+- Separating writing from technical validation
+- Adapting content for different audiences and content types
+- Keeping human review in the publishing path
+- Maintaining draft and version context
+
+---
+
+## How It Works
+
+<p align="center">
+  <img src="docs/readme_assets/workflow.svg" alt="End-to-end workflow" width="720">
+</p>
+
+The workflow starts with technical information and ends with content that is ready for human approval and the next publishing step.
+
+### Typical inputs
+
+- Code changes or diffs
+- Release and product notes
+- API specifications
+- Issue or feature context
+- Existing documentation
+- Content type and audience requirements
+
+### Typical outputs
+
+- Release notes
+- Technical documentation
+- Developer-facing content
+- Onboarding content
+- API documentation
+
+---
+
+## Multi-Agent Workflow
+
+<p align="center">
+  <img src="docs/readme_assets/multi_agent_workflow.svg" alt="Multi-agent workflow" width="720">
+</p>
+
+Each stage has a focused responsibility:
+
+| Stage | Responsibility |
+|---|---|
+| **Input Analysis** | Understand the request, audience, and technical change. |
+| **Context Reader** | Extract relevant facts and prepare working context. |
+| **Documentation Writer** | Create the initial structured draft. |
+| **Technical Reviewer** | Check technical accuracy and identify unsupported or missing information. |
+| **Tone Optimizer** | Adapt language, clarity, and style for the target content type. |
+| **Content Refinement** | Improve structure, headings, flow, and readability. |
+| **Human Review** | Provide the final editorial and technical approval. |
+| **Publishing Preparation** | Prepare approved content and metadata for the next publishing step. |
+
+---
+
+## Technical Architecture
+
+<p align="center">
+  <img src="docs/readme_assets/architecture.svg" alt="Technical architecture" width="720">
+</p>
+
+### Main components
+
+**Frontend**
+- Content intake
+- Context view
+- Draft editor
+- Review interface
+- Workflow/dashboard views
+
+**Backend**
+- Content-job management
+- Input handling
+- Context assembly
+- Agent orchestration
+- Draft/version management
+- Review state
+
+**AI layer**
+- CrewAI agent workflow
+- Gemini-powered generation and refinement
+- Structured agent responsibilities
+
+**Retrieval layer**
+- Searchable project knowledge
+- Existing documentation and content context
+- Relevant context supplied to the AI workflow
+
+**Data layer**
+- PostgreSQL / Supabase for application data
+- ChromaDB for vector-based retrieval
+- GitLab API for repository and engineering context
+
+---
+
+## Context & Knowledge Retrieval
+
+<p align="center">
+  <img src="docs/readme_assets/retrieval_workflow.svg" alt="Context and knowledge retrieval workflow" width="720">
+</p>
+
+Retrieval is used to provide the AI workflow with relevant existing knowledge instead of relying only on the current request.
+
+The general flow is:
+
+**Ingest → Prepare → Store → Retrieve → Validate → Build Context Pack**
+
+This helps the generation workflow use existing terminology, documentation, examples, and other relevant project knowledge.
+
+---
+
+## Example Use Case
+
+### From a GitLab code change to release documentation
+
+Consider a developer merging a feature that changes an existing product behavior.
+
+```text
+1. Code change
+   Developer merges or provides the technical change.
+
+        ↓
+
+2. Context collection
+   The application gathers the change and related
+   notes, API details, issues, or existing documentation.
+
+        ↓
+
+3. Draft generation
+   The AI workflow creates an initial release/documentation draft.
+
+        ↓
+
+4. Technical validation
+   The technical-review stage checks facts, missing information,
+   and potentially unsupported claims.
+
+        ↓
+
+5. Tone & structure
+   The content is refined for the selected audience and format.
+
+        ↓
+
+6. Human review
+   A writer, engineer, or domain reviewer checks the draft.
+
+        ↓
+
+7. Approval
+   The reviewer accepts the content or sends it back for revision.
+
+        ↓
+
+8. Publishing preparation
+   The approved content is prepared for export or the next
+   documentation/publishing workflow.
+```
+
+### Why this is useful
+
+Without the engine, the writer may need to collect information from several places before starting the document.
+
+With the engine, the technical context is brought together first, then passed through specialized AI stages before the writer or reviewer makes the final decision.
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Backend API** | FastAPI | API endpoints, orchestration, and application services |
+| **AI Orchestration** | CrewAI | Coordinates specialized content agents |
+| **LLM** | Gemini | Generation, analysis, review, and refinement |
+| **Retrieval** | ChromaDB | Semantic retrieval of relevant knowledge |
+| **Database** | PostgreSQL / Supabase | Application and workflow data |
+| **Database Access** | SQLAlchemy | Python database access |
+| **GitLab Integration** | GitLab API | Repository and engineering context |
+| **Frontend** | Project web interface | User interaction, content workflow, and review |
+
+---
+
+## Project Structure
+
+The repository is organized around the major application responsibilities rather than placing the entire workflow in a single module.
+
+```text
+gitlab-ai-content-engine/
+│
+├── backend/
+│   ├── agents/
+│   │   └── crew.py              # Multi-agent workflow
+│   ├── retrieval/
+│   │   └── chroma_store.py      # Vector retrieval
+│   ├── auth/                    # Authentication-related logic
+│   ├── database/                # Database configuration / models
+│   ├── services/                # Application services
+│   ├── chroma_data/             # Retrieval data where used
+│   ├── main.py                  # FastAPI application entry point
+│   ├── models.py                # Application models
+│   └── requirements.txt         # Backend dependencies
+│
+├── frontend/
+│   └── ...                      # Web application
+│
+├── data/
+│   ├── sample_inputs/           # Example technical inputs
+│   ├── sample_docs/             # Example documentation
+│   ├── style_guides/            # Writing/style context
+│   └── content_templates/       # Content templates
+│
+├── tests/
+│   ├── functional_tests/
+│   ├── ai_output_tests/
+│   └── edge_cases/
+│
+├── docs/
+│   └── readme_assets/            # README diagrams
+│
+├── .env.example
+└── README.md
+```
+
+> Folder names can vary slightly with the current implementation; the structure above reflects the main responsibilities of the project.
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd gitlab-ai-content-engine
+```
+
+### 2. Create the Python environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install backend dependencies
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+### 4. Configure environment variables
+
+Create the local environment file from the provided template:
+
+```bash
+cp .env.example .env
+```
+
+Add the required service credentials and connection values.
+
+### 5. Run the application
+
+Start the backend and frontend using the development commands defined by the project.
+
+---
+
+## Configuration
+
+Create a local `.env` file using `.env.example`.
+
+| Variable | Purpose |
+|---|---|
+| `GEMINI_API_KEY` | Gemini API key used by the AI workflow |
+| `GOOGLE_API_KEY` | Google API key where required by the configured AI services |
+| `DATABASE_URL` | PostgreSQL / Supabase connection URL |
+| `GITLAB_URL` | GitLab instance URL, for example `https://gitlab.com` |
+| `GITLAB_TOKEN` | GitLab personal/project access token used for GitLab API access |
+| `SMTP_HOST` | SMTP server hostname used for email delivery |
+| `SMTP_PORT` | SMTP server port |
+| `SMTP_USERNAME` | SMTP account username |
+| `SMTP_PASSWORD` | SMTP account/app password |
+| `SMTP_FROM` | Sender address used for application emails |
+
+### Security
+
+Keep real credentials only in `.env` or the deployment platform's secret manager.
+
+**Never commit:**
+
+- API keys
+- Database passwords
+- GitLab tokens
+- SMTP passwords
+- Production `.env` files
+
+The `.env.example` file should contain variable names and safe placeholders only.
+
+---
+
+## Core Application Flow
+
+```text
+User
+  │
+  ▼
+Content Request
+  │
+  ├── Technical input
+  ├── Existing documentation
+  └── Content requirements
+  │
+  ▼
+Context Preparation
+  │
+  ▼
+Multi-Agent Workflow
+  │
+  ├── Read context
+  ├── Draft
+  ├── Technical review
+  ├── Refine tone
+  └── Improve structure
+  │
+  ▼
+Review-Ready Draft
+  │
+  ▼
+Human Review
+  │
+  ├── Revise ───────► AI Workflow
+  │
+  └── Approve
+        │
+        ▼
+  Publishing Preparation
+```
+
+---
+
+## Source Grounding & Human Review
+
+A central design principle is that generated content should remain connected to the technical context available to the system.
+
+The workflow therefore separates:
+
+**context preparation → generation → technical checking → refinement → human approval**
+
+This provides a clear place to identify missing information and questionable claims before content is approved.
+
+AI generation is therefore treated as an **assistive step**, not the final publishing decision.
+
+---
+
+## Development Notes
+
+The project separates responsibilities so individual parts can be developed and tested independently:
+
+- **Frontend** — user interaction and content workflow
+- **Backend** — API, application state, and orchestration
+- **Agents** — specialized AI responsibilities
+- **Retrieval** — relevant knowledge and context
+- **Database** — persistent application data
+- **GitLab integration** — technical repository context
+- **Human review** — final quality and approval step
+
+This separation also makes it easier to extend the workflow with additional content types, knowledge sources, review stages, and publishing integrations.
+
+---
+
+## Project Status
+
+🚧 **Active Development**
+
+The current project focuses on the core AI documentation workflow: source/context handling, multi-agent generation and review, retrieval, human approval, and application integration.
+
+---
+
+<p align="center">
+  <strong>Technical Change → Context → AI Workflow → Human Review → Documentation</strong>
+</p>
