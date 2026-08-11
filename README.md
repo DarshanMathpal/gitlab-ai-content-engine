@@ -154,7 +154,20 @@ flowchart TD
 ## Architecture
 
 ```mermaid
-flowchart TB
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontSize": "11px"
+  },
+  "flowchart": {
+    "nodeSpacing": 20,
+    "rankSpacing": 25,
+    "padding": 5
+  }
+}}%%
+
+flowchart TD
+
     subgraph UI["Application"]
         Intake["Content Intake"]
         Context["Context Review"]
@@ -195,6 +208,14 @@ flowchart TB
     Agents --> LLM
     Agents --> Versions
     Versions --> SQL
+
+    classDef stage fill:#EEF2FF,stroke:#6366F1,color:#1E1B4B,stroke-width:1px;
+    classDef review fill:#FEF3C7,stroke:#F59E0B,color:#78350F,stroke-width:1px;
+    classDef output fill:#ECFDF5,stroke:#10B981,color:#064E3B,stroke-width:1px;
+
+    class Intake,Context,Workflow,Editor,Jobs,Assembly stage;
+    class Review,Orchestration,Agents review;
+    class Retrieval,LLM,Versions,SQL,Vector output;
 ```
 
 ### Architecture responsibilities
