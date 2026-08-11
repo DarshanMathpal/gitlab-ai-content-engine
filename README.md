@@ -75,16 +75,27 @@ Depending on the request, the workflow can prepare:
 Each stage has a focused responsibility instead of relying on a single generation step.
 
 ```mermaid
-flowchart LR
-    I["Input Analysis"] --> C["Context Reader"]
-    C --> W["Documentation Writer"]
-    W --> R["Technical Reviewer"]
-    R --> T["Tone Optimizer"]
-    T --> S["Structure & Content Refinement"]
-    S --> H["Human Review"]
+flowchart TB
+    I["Input Analysis"]
+    C["Context Reader"]
+    W["Documentation Writer"]
+    R["Technical Reviewer"]
+    T["Tone Optimizer"]
+    S["Structure & Content Refinement"]
+    H["Human Review"]
+    P["Publishing Preparation"]
 
+    I --> C --> W --> R --> T --> S --> H
     H -->|Revise| W
-    H -->|Approve| P["Publishing Preparation"]
+    H -->|Approve| P
+
+    classDef stage fill:#F8FAFC,stroke:#64748B,color:#0F172A;
+    classDef review fill:#FFF4E5,stroke:#D97706,color:#0F172A;
+    classDef output fill:#E8F8F0,stroke:#059669,color:#0F172A;
+
+    class I,C,W,R,T,S stage;
+    class H review;
+    class P output;
 ```
 
 | Stage | Responsibility |
