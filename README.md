@@ -1,5 +1,3 @@
-# gitlab-ai-content-engine
-AI-powered multi-agent engine that transforms technical changes, code diffs, and product context into source-grounded, review-ready documentation and content.
 # GitLab AI Content & Documentation Engine
 
 > Turn technical changes into source-grounded, review-ready documentation with a multi-agent AI workflow.
