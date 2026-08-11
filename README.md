@@ -268,17 +268,20 @@ Start the backend and frontend using the project's configured development comman
 
 ## Configuration
 
-The application uses environment variables for credentials and service configuration.
+Create a local `.env` file using `.env.example`.
 
-Typical configuration includes:
-
-```text
-GEMINI_API_KEY
-GOOGLE_API_KEY
-DATABASE_URL
-```
-
-The real values belong only in `.env`.
+| Variable | Purpose |
+|---|---|
+| `GEMINI_API_KEY` | Gemini API key used by the AI workflow |
+| `GOOGLE_API_KEY` | Google API key where required by the configured AI services |
+| `DATABASE_URL` | PostgreSQL / Supabase connection URL |
+| `GITLAB_URL` | GitLab instance URL, for example `https://gitlab.com` |
+| `GITLAB_TOKEN` | GitLab personal/project access token used for GitLab API access |
+| `SMTP_HOST` | SMTP server hostname used for email delivery |
+| `SMTP_PORT` | SMTP server port |
+| `SMTP_USERNAME` | SMTP account username |
+| `SMTP_PASSWORD` | SMTP account/app password |
+| `SMTP_FROM` | Sender address used for application emails |
 
 ---
 
