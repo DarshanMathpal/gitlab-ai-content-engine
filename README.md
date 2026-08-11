@@ -46,6 +46,7 @@ flowchart LR
     E -->|Changes requested| C
     E -->|Approved| F
 ```
+<img width="1024" height="1536" alt="ChatGPT Image Aug 11, 2026, 10_13_42 PM" src="https://github.com/user-attachments/assets/e3ca1081-0390-4075-9ada-b096d630f31f" />
 
 ### Typical input
 
