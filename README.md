@@ -357,8 +357,6 @@ cd frontend
 npm install
 npm run dev
 ```
-> Keep the actual commands for each service in the project-specific setup documentation if the frontend/backend run independently.
-
 ---
 
 ## Configuration
