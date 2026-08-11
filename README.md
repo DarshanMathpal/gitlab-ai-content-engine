@@ -42,9 +42,7 @@ flowchart LR
     E["Human Review<br/>Approve or Request Changes"]
     F["Publishing Preparation<br/>Export approved content"]
 
-    A --> B --> C --> D --> E
-    E -->|Changes requested| C
-    E -->|Approved| F
+
 ```
 
 ### Typical input
