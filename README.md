@@ -409,9 +409,7 @@ The project is being developed as a multi-agent AI documentation workflow with s
 ---
 
 <p align="center">
-
   <strong>Technical Change → Context → AI Workflow → Human Review → Documentation</strong>
-
 </p>
 
 
