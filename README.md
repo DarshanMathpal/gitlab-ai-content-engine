@@ -389,7 +389,7 @@ The project is being developed as a multi-agent AI documentation workflow with s
 
 <p align="center">
 
-**Technical Change → Context → AI Workflow → Human Review → Documentation**
+  <strong>Technical Change → Context → AI Workflow → Human Review → Documentation</strong>
 
 </p>
 
