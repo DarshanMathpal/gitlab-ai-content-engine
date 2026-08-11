@@ -200,25 +200,46 @@ flowchart TB
 
 ## Project Structure
 
+The repository is organized around the major application responsibilities rather than placing the entire workflow in a single module.
+
 ```text
 gitlab-ai-content-engine/
 │
-├── frontend/
-│   └── ...                 # Web application
-│
 ├── backend/
-│   ├── agents/             # CrewAI agents and workflow
-│   ├── retrieval/          # Context and vector retrieval
-│   ├── api/                # Backend endpoints
-│   ├── database/           # Database models / access
-│   └── ...
+│   ├── agents/
+│   │   └── crew.py              # Multi-agent workflow
+│   ├── retrieval/
+│   │   └── chroma_store.py      # Vector retrieval
+│   ├── auth/                    # Authentication-related logic
+│   ├── database/                # Database configuration / models
+│   ├── services/                # Application services
+│   ├── chroma_data/             # Retrieval data where used
+│   ├── main.py                  # FastAPI application entry point
+│   ├── models.py                # Application models
+│   └── requirements.txt         # Backend dependencies
 │
-├── data/                   # Local/sample content where applicable
-├── docs/                   # Project documentation and README assets
-├── tests/                  # Tests
-├── .env.example            # Environment variable template
+├── frontend/
+│   └── ...                      # Web application
+│
+├── data/
+│   ├── sample_inputs/           # Example technical inputs
+│   ├── sample_docs/             # Example documentation
+│   ├── style_guides/            # Writing/style context
+│   └── content_templates/       # Content templates
+│
+├── tests/
+│   ├── functional_tests/
+│   ├── ai_output_tests/
+│   └── edge_cases/
+│
+├── docs/
+│   └── readme_assets/            # README diagrams
+│
+├── .env.example
 └── README.md
 ```
+
+> Folder names can vary slightly with the current implementation; the structure above reflects the main responsibilities of the project.
 
 ---
 
