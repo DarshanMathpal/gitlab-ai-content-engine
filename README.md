@@ -283,6 +283,20 @@ Create a local `.env` file using `.env.example`.
 | `SMTP_PASSWORD` | SMTP account/app password |
 | `SMTP_FROM` | Sender address used for application emails |
 
+### Security
+
+Keep real credentials only in `.env` or the deployment platform's secret manager.
+
+**Never commit:**
+
+- API keys
+- Database passwords
+- GitLab tokens
+- SMTP passwords
+- Production `.env` files
+
+The `.env.example` file should contain variable names and safe placeholders only.
+
 ---
 
 ## Core Workflow in the Application
@@ -365,21 +379,7 @@ This separation makes the workflow easier to test, debug, and extend.
 
 ---
 
-## Security
-
-Never commit:
-
-- API keys
-- Database passwords
-- Repository access tokens
-- Private credentials
-- Production `.env` files
-
-Use environment variables and keep secrets on the server side.
-
----
-
-## Status
+## Project Status
 
 🚧 **Active development**
 
