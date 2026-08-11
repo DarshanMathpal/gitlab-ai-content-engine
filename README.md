@@ -45,6 +45,14 @@ flowchart TB
     A --> B --> C --> D --> E
     E -->|Changes requested| C
     E -->|Approved| F
+
+    classDef stage fill:#F8FAFC,stroke:#64748B,color:#0F172A;
+    classDef review fill:#FFF4E5,stroke:#D97706,color:#0F172A;
+    classDef output fill:#E8F8F0,stroke:#059669,color:#0F172A;
+
+    class A,B,C,D,E,F stage;
+    class E review;
+    class F output;
 ```
 
 ### Typical input
