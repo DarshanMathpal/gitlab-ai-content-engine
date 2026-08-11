@@ -480,6 +480,23 @@ The project is being developed as a multi-agent AI documentation workflow with s
 
 ---
 
+## Contributors
+
+This project was developed collaboratively by:
+
+| Contributor | Role / Contribution |
+|---|---|
+| Himanshu Shende | Project Development |
+| Himanshu Gupta | Project Development |
+| Aparna Nale | Project Development |
+| Mrunali Wadi | Project Development |
+| Surya Rohila | Project Development |
+| Darshan Mathpal | Project Development |
+
+All contributors participated in the development, testing, documentation, and refinement of the project.
+
+---
+
 <p align="center">
   <strong>Technical Change → Context → AI Workflow → Human Review → Documentation</strong>
 </p>
