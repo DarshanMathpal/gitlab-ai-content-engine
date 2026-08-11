@@ -459,6 +459,21 @@ A team can therefore start with technical information that already exists and us
 
 ## Screenshots
 
+### 1. Application Dashboard
+[image]
+
+### 2. Content Intake
+[image]
+
+### 3. AI Content Workflow
+[image]
+
+### 4. Generated Documentation
+[image]
+
+### 5. Human Review
+[image]
+
 ---
 
 ## Development Notes
