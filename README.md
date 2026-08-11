@@ -34,27 +34,6 @@ This project brings those inputs together and creates a controlled path from tec
 ## How it works
 
 ```mermaid
-flowchart TB
-    A["Technical Inputs<br/>Code changes • Notes • API specs • Existing docs"]
-    B["Context Preparation<br/>Extract facts • Organize sources • Retrieve context"]
-    C["AI Content Workflow<br/>Draft • Technical Review • Tone • Structure"]
-    D["Review-Ready Draft<br/>Sources • Flags • Version"]
-    E["Human Review<br/>Approve or Request Changes"]
-    F["Publishing Preparation<br/>Export approved content"]
-
-    A --> B --> C --> D --> E
-    E -->|Changes requested| C
-    E -->|Approved| F
-
-    classDef stage fill:#F8FAFC,stroke:#64748B,color:#0F172A;
-    classDef review fill:#FFF4E5,stroke:#D97706,color:#0F172A;
-    classDef output fill:#E8F8F0,stroke:#059669,color:#0F172A;
-
-    class A,B,C,D,E,F stage;
-    class E review;
-    class F output;
-```
-```mermaid
 %%{init: {
   "theme": "base",
   "themeVariables": {
