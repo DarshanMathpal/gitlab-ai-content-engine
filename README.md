@@ -34,7 +34,7 @@ This project brings those inputs together and creates a controlled path from tec
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TB
     A["Technical Inputs<br/>Code changes • Notes • API specs • Existing docs"]
     B["Context Preparation<br/>Extract facts • Organize sources • Retrieve context"]
     C["AI Content Workflow<br/>Draft • Technical Review • Tone • Structure"]
@@ -46,7 +46,6 @@ flowchart LR
     E -->|Changes requested| C
     E -->|Approved| F
 ```
-<img width="1024" height="1536" alt="ChatGPT Image Aug 11, 2026, 10_13_42 PM" src="https://github.com/user-attachments/assets/e3ca1081-0390-4075-9ada-b096d630f31f" />
 
 ### Typical input
 
