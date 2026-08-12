@@ -367,9 +367,9 @@ The backend will be available locally at:
 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 
-### 7. Start the frontend
+### 7. Start the Frontend
 
-Open a new terminal:
+Open a new terminal from the project root:
 
 ```bash
 cd frontend
@@ -377,8 +377,11 @@ npm install
 npm run dev
 ```
 
-If frontend dependencies are already installed, skip npm install and run npm run dev.
+The frontend will be available at the local URL shown in the terminal, typically:
 
+[http://localhost:5173](http://localhost:5173)
+
+> If the frontend dependencies are already installed, you can skip `npm install` and run `npm run dev`.
 ---
 
 ## Configuration
