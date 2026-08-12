@@ -351,40 +351,6 @@ Index the knowledge base for retrieval
 python -m retrieval.ingest_knowledge
 ```
 
-### 6. Start the backend
-
-Start the FastAPI backend using Uvicorn:
-
-```bash
-python3 -m uvicorn main:app --reload
-```
-The backend will be available locally at:
-
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-**Interactive API documentation:**
-
-[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
-
-### 7. Start the Frontend
-
-Open a new terminal from the project root:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The frontend will be available at the local URL shown in the terminal, typically:
-
-[http://localhost:5173](http://localhost:5173)
-
-> If the frontend dependencies are already installed, you can skip `npm install` and run `npm run dev`.
-
----
-
 ### 6. Start the Backend
 
 Start the FastAPI backend from the `backend` directory:
