@@ -368,7 +368,6 @@ Once the server starts, you can access:
 
 > The API documentation is provided by FastAPI's interactive Swagger interface.
 
----
 
 ### 7. Start the Frontend
 
@@ -388,7 +387,6 @@ For a typical Vite setup:
 
 > If the frontend dependencies have already been installed, you can skip `npm install` and run `npm run dev`.
 
----
 
 ### Running the Application
 
