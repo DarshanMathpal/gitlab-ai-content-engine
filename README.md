@@ -172,8 +172,6 @@ flowchart TD
 flowchart TD
 
     subgraph UI["Application"]
-
-
         Intake["Content Intake"]
         Context["Context Review"]
         Workflow["Workflow Monitor"]
