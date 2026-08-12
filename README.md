@@ -492,17 +492,17 @@ AI generation is not treated as the final publishing decision.
 
 ## Screenshots
 
-### 1. Application Dashboard
+### 1. Home / Product Overview
+<img width="1379" height="757" alt="2" src="https://github.com/user-attachments/assets/badae35c-eaae-42c5-bcaf-09f9fa1d6701" />
+
+### 2. Application Dashboard
 <img width="2047" height="1163" alt="4" src="https://github.com/user-attachments/assets/9f2ee44f-9e5b-4692-99a9-36e9aba1bc3b" />
 
-### 2. Generate Documentation
+### 3. Generate Documentation
 <img width="1291" height="769" alt="5" src="https://github.com/user-attachments/assets/762e0b17-7fe6-4fe4-a80a-433948cc0e9b" />
 
-### 3. Context Preview / Source Grounding
+### 4. Context Preview / Source Grounding
 <img width="1288" height="779" alt="6" src="https://github.com/user-attachments/assets/6c9f81c1-42f6-4b8b-b3b1-48662777a5b1" />
-
-### 4. Home / Product Overview
-<img width="1379" height="757" alt="2" src="https://github.com/user-attachments/assets/badae35c-eaae-42c5-bcaf-09f9fa1d6701" />
 
 ---
 
