@@ -577,4 +577,3 @@ All contributors participated in the development, testing, documentation, and re
 <p align="center">
   <strong>Technical Change → Context → AI Workflow → Human Review → Documentation</strong>
 </p>
----
