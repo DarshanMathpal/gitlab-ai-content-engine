@@ -256,7 +256,7 @@ flowchart TD
 | **LLM** | Gemini |
 | **Retrieval / Vector Store** | ChromaDB |
 | **Operational Database** | PostgreSQL / Supabase |
-| **ORM / Database Access** | SQLAlchemy |
+| **Database Access** | SQLAlchemy |
 | **GitLab Integration** | python-gitlab |
 | **Frontend Framework** | Next.js 14, React 18 |
 | **Styling** | Tailwind CSS |
@@ -351,7 +351,7 @@ Configure the required LLM, GitLab, SMTP, and database variables.
 
 ### 5. Index the knowledge base
 
-Index the knowledge base for retrieval
+Prepare the project knowledge for retrieval:
 
 ```bash
 python -m retrieval.ingest_knowledge
@@ -427,10 +427,10 @@ Create a local `.env` file using `.env.example`.
 | `GEMINI_API_KEY` | Gemini API key used by the AI workflow |
 | `GOOGLE_API_KEY` | Google API key where required by the configured AI services |
 | `DATABASE_URL` | PostgreSQL / Supabase connection URL |
-| `GITLAB_URL` | GitLab instance URL, for example `https://gitlab.com` |
+| `GITLAB_URL` | GitLab instance URL, for example `https://gitlab.com/api/v4` |
 | `GITLAB_TOKEN` | GitLab personal/project access token used for GitLab API access |
-| `SMTP_HOST` | SMTP server hostname used for email delivery |
-| `SMTP_PORT` | SMTP server port |
+| `SMTP_HOST` | SMTP server hostname, e.g. `smtp.gmail.com` |
+| `SMTP_PORT` | SMTP server port, e.g. `587` |
 | `SMTP_USERNAME` | SMTP account username |
 | `SMTP_PASSWORD` | SMTP account/app password |
 | `SMTP_FROM` | Sender address used for application emails |
