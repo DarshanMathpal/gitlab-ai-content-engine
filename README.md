@@ -339,11 +339,13 @@ Create a `.env` file from the provided example:
 cp .env.example .env
 ```
 
-Add the required values for the project's LLM and database configuration.
+Configure the required LLM, GitLab, SMTP, and database variables.
 
-**Do not commit `.env` or API keys to GitHub.**
+**Do not commit .env, API keys, passwords, or access tokens to GitHub.**
 
 ### 5. Load the knowledge base
+
+Index the knowledge base for retrieval
 
 ```bash
 python -m retrieval.ingest_knowledge
@@ -351,9 +353,20 @@ python -m retrieval.ingest_knowledge
 
 ### 6. Start the backend
 
+Start the FastAPI backend using Uvicorn:
+
 ```bash
 python3 -m uvicorn main:app --reload
 ```
+The backend will be available locally at:
+
+[http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+**Interactive API documentation:**
+
+[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+
 ### 7. Start the frontend
 
 Open a new terminal:
@@ -363,6 +376,9 @@ cd frontend
 npm install
 npm run dev
 ```
+
+If frontend dependencies are already installed, skip npm install and run npm run dev.
+
 ---
 
 ## Configuration
