@@ -2,10 +2,9 @@
 
 > Turn technical changes into source-grounded, review-ready documentation with a multi-agent AI workflow.
 
-🚀 **[Open Live Demo →](https://your-deployed-website.com)**
+🚀 **[View Live Application](https://your-deployed-website.com)**
 
 ---
-
 ## Overview
 
 The **GitLab AI Content & Documentation Engine** helps teams transform technical inputs such as code changes, release notes, API specifications, issue context, and existing documentation into structured content drafts.
