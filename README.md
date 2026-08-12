@@ -2,13 +2,9 @@
 
 > Turn technical changes into source-grounded, review-ready documentation with a multi-agent AI workflow.
 
-🚀 **[Live Demo](https://your-deployed-website.com)**
+🚀 **[Open Live Demo →](https://your-deployed-website.com)**
 
-### 🚀 Try the Application
-
-**[→ Open Live Demo](https://your-deployed-website.com)**
-
-Experience the AI-powered documentation workflow directly in your browser.
+---
 
 ## Overview
 
