@@ -172,7 +172,6 @@ flowchart TD
 flowchart TD
 
     subgraph UI["Application"]
-        UI_SPACER[" "]
         Intake["Content Intake"]
         Context["Context Review"]
         Workflow["Workflow Monitor"]
@@ -181,7 +180,6 @@ flowchart TD
     end
 
     subgraph API["Backend"]
-        API_SPACER[" "]
         Jobs["Content Job Management"]
         Assembly["Context Assembly"]
         Orchestration["Agent Orchestration"]
