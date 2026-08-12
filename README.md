@@ -343,12 +343,18 @@ Add the required values for the project's LLM and database configuration.
 
 **Do not commit `.env` or API keys to GitHub.**
 
-### 5. Start the backend
+### 5. Load the knowledge base
+
+```bash
+python -m retrieval.ingest_knowledge
+```
+
+### 6. Start the backend
 
 ```bash
 python3 -m uvicorn main:app --reload
 ```
-### 6. Start the frontend
+### 7. Start the frontend
 
 Open a new terminal:
 
