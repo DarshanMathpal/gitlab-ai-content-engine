@@ -491,30 +491,6 @@ AI generation is not treated as the final publishing decision.
 
 ---
 
-## Example Use Case
-
-### From code change to release documentation
-
-```text
-Code change / release context
-            ↓
-      Context preparation
-            ↓
-       Draft generation
-            ↓
-     Technical validation
-            ↓
-      Tone / structure
-            ↓
-        Human review
-            ↓
-      Approved content
-```
-
-A team can therefore start with technical information that already exists and use the engine to prepare a documentation draft rather than writing the entire document manually from scratch.
-
----
-
 ## Screenshots
 
 ### 1. Application Dashboard
@@ -531,21 +507,6 @@ A team can therefore start with technical information that already exists and us
 
 ### 5. Human Review
 [image]
-
----
-
-## Development Notes
-
-The project is organized around a clear separation of responsibilities:
-
-- **Frontend** handles the user experience.
-- **Backend** manages requests, data, and orchestration.
-- **Agents** handle specialized content tasks.
-- **Retrieval** supplies relevant existing knowledge.
-- **Database** stores application state and versions.
-- **Human review** controls the final approval step.
-
-This separation makes the workflow easier to test, debug, and extend.
 
 ---
 
