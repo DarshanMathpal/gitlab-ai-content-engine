@@ -308,9 +308,8 @@ gitlab-ai-content-engine/
 └── 📘 README.md                   # Project documentation
 ```
 
-> Folder names can vary slightly with the current implementation; the structure above reflects the main responsibilities of the project.
-
 ---
+<img width="2047" height="1163" alt="4" src="https://github.com/user-attachments/assets/9f2ee44f-9e5b-4692-99a9-36e9aba1bc3b" />
 
 ## Getting Started
 
@@ -395,7 +394,7 @@ Once the development server starts, you can access:
 
 ---
 
-### Running the Application
+## Running the Application
 
 With both services running:
 
@@ -513,9 +512,9 @@ AI generation is not treated as the final publishing decision.
 
 ## Project Status
 
-🚧 **Active development**
+🚀 **Deployed**
 
-The project is being developed as a multi-agent AI documentation workflow with source ingestion, retrieval, content generation, technical review, refinement, and human approval.
+The application is deployed and available through the live application link above.
 
 ---
 
