@@ -171,7 +171,7 @@ flowchart TD
 
 flowchart TD
 
-    subgraph UI["Application"]
+    subgraph UI["Application<br/><br/>"]
         Intake["Content Intake"]
         Context["Context Review"]
         Workflow["Workflow Monitor"]
