@@ -271,38 +271,40 @@ The repository is organized around the major application responsibilities rather
 ```text
 gitlab-ai-content-engine/
 │
-├── backend/
-│   ├── agents/
-│   │   └── crew.py              # Multi-agent workflow
-│   ├── retrieval/
-│   │   └── chroma_store.py      # Vector retrieval
-│   ├── auth/                    # Authentication-related logic
-│   ├── database/                # Database configuration / models
-│   ├── services/                # Application services
-│   ├── chroma_data/             # Retrieval data where used
-│   ├── main.py                  # FastAPI application entry point
-│   ├── models.py                # Application models
-│   └── requirements.txt         # Backend dependencies
+├── 🧠 backend/                    # AI & API layer
+│   ├── 🤖 agents/
+│   │   └── crew.py                # Multi-agent workflow
+│   │
+│   ├── 🔎 retrieval/
+│   │   └── chroma_store.py        # Knowledge retrieval
+│   │
+│   ├── 🔐 auth/                   # Authentication
+│   ├── 🗄️ database/               # Database models & configuration
+│   ├── ⚙️ services/               # Application services
+│   ├── 📚 chroma_data/             # Knowledge-base data
+│   │
+│   ├── main.py                    # FastAPI entry point
+│   ├── models.py                  # Application models
+│   └── requirements.txt           # Backend dependencies
 │
-├── frontend/
-│   └── ...                      # Web application
+├── 🎨 frontend/                   # Web application
 │
-├── data/
-│   ├── sample_inputs/           # Example technical inputs
-│   ├── sample_docs/             # Example documentation
-│   ├── style_guides/            # Writing/style context
-│   └── content_templates/       # Content templates
+├── 📦 data/                       # Project knowledge & examples
+│   ├── 📥 sample_inputs/          # Example technical inputs
+│   ├── 📄 sample_docs/            # Example documentation
+│   ├── ✍️ style_guides/            # Writing guidelines
+│   └── 🧩 content_templates/      # Documentation templates
 │
-├── tests/
-│   ├── functional_tests/
-│   ├── ai_output_tests/
-│   └── edge_cases/
+├── 🧪 tests/                      # Test suite
+│   ├── functional_tests/          # Functional testing
+│   ├── ai_output_tests/           # AI output validation
+│   └── edge_cases/                # Edge-case testing
 │
-├── docs/
-│   └── readme_assets/            # README diagrams
+├── 📖 docs/                       # Documentation assets
+│   └── readme_assets/             # README diagrams & images
 │
-├── .env.example
-└── README.md
+├── 🔑 .env.example                # Environment template
+└── 📘 README.md                   # Project documentation
 ```
 
 > Folder names can vary slightly with the current implementation; the structure above reflects the main responsibilities of the project.
