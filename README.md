@@ -171,7 +171,7 @@ flowchart TD
 
 flowchart TD
 
-    subgraph UI["Application"]
+    subgraph UI["Application<br/><br/>"]
         Intake["Content Intake"]
         Context["Context Review"]
         Workflow["Workflow Monitor"]
@@ -179,7 +179,7 @@ flowchart TD
         Review["Review"]
     end
 
-    subgraph API["Backend"]
+    subgraph API["Backend<br/><br/>"]
         Jobs["Content Job Management"]
         Assembly["Context Assembly"]
         Orchestration["Agent Orchestration"]
@@ -427,7 +427,7 @@ Create a local `.env` file using `.env.example`.
 | `GEMINI_API_KEY` | Gemini API key used by the AI workflow |
 | `GOOGLE_API_KEY` | Google API key where required by the configured AI services |
 | `DATABASE_URL` | PostgreSQL / Supabase connection URL |
-| `GITLAB_URL` | GitLab instance URL, for example `https://gitlab.com/api/v4` |
+| `GITLAB_URL` | GitLab API base URL, for example `https://gitlab.com/api/v4` |
 | `GITLAB_TOKEN` | GitLab personal/project access token used for GitLab API access |
 | `SMTP_HOST` | SMTP server hostname, e.g. `smtp.gmail.com` |
 | `SMTP_PORT` | SMTP server port, e.g. `587` |
