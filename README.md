@@ -254,13 +254,14 @@ flowchart TD
 | **Backend API** | FastAPI |
 | **AI Orchestration** | CrewAI |
 | **LLM** | Gemini |
-| **Retrieval / Vector Store** | Chroma |
+| **Retrieval / Vector Store** | ChromaDB |
 | **Operational Database** | PostgreSQL / Supabase |
 | **ORM / Database Access** | SQLAlchemy |
-| **Configuration** | Python `.env` configuration |
-| **Frontend** | Project web interface |
-
-> The exact frontend/deployment configuration can vary with the environment. Backend and AI components above reflect the project's implementation direction.
+| **GitLab Integration** | python-gitlab |
+| **Frontend Framework** | Next.js 14, React 18 |
+| **Styling** | Tailwind CSS |
+| **UI & Animation** | Framer Motion, Lucide React, React Icons |
+| **Data Visualization** | Recharts |
 
 ---
 
@@ -348,7 +349,7 @@ Configure the required LLM, GitLab, SMTP, and database variables.
 
 **Do not commit .env, API keys, passwords, or access tokens to GitHub.**
 
-### 5. Load the knowledge base
+### 5. Index the knowledge base
 
 Index the knowledge base for retrieval
 
