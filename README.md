@@ -4,6 +4,12 @@
 
 🚀 **[Live Demo](https://your-deployed-website.com)**
 
+### 🚀 Try the Application
+
+**[→ Open Live Demo](https://your-deployed-website.com)**
+
+Experience the AI-powered documentation workflow directly in your browser.
+
 ## Overview
 
 The **GitLab AI Content & Documentation Engine** helps teams transform technical inputs such as code changes, release notes, API specifications, issue context, and existing documentation into structured content drafts.
