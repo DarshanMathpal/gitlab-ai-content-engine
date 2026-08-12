@@ -249,7 +249,7 @@ flowchart TD
 
 ## Tech Stack
 
-| Layer | Technology |
+| Layer | Tools |
 |---|---|
 | **Backend API** | FastAPI |
 | **AI Orchestration** | CrewAI |
@@ -504,7 +504,7 @@ AI generation is not treated as the final publishing decision.
 ### 4. Context Preview / Source Grounding
 <img width="1288" height="779" alt="6" src="https://github.com/user-attachments/assets/6c9f81c1-42f6-4b8b-b3b1-48662777a5b1" />
 
-### ### 5. Generated Documentation / Release Notes
+### 5. Generated Documentation / Release Notes
 <img width="1280" height="756" alt="7" src="https://github.com/user-attachments/assets/971a3bd8-f1b9-405a-9e59-3dd895df4b57" />
 
 ---
