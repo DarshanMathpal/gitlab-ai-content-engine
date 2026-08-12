@@ -379,11 +379,11 @@ npm install
 npm run dev
 ```
 
-Once the development server starts, open the local URL shown in your terminal.
+Once the development server starts, you can access:
 
-For a typical Vite setup:
-
-**[http://localhost:5173](http://localhost:5173)**
+| Service | Local URL |
+| --- | --- |
+| **Frontend Application** | [http://localhost:3000](http://localhost:3000) |
 
 > If the frontend dependencies have already been installed, you can skip `npm install` and run `npm run dev`.
 
