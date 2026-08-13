@@ -427,37 +427,26 @@ Create a local `.env` file using `.env.example`.
 | `DATABASE_URL` | PostgreSQL / Supabase connection URL |
 | `GITLAB_URL` | GitLab API base URL, for example `https://gitlab.com/api/v4` |
 | `GITLAB_TOKEN` | GitLab personal/project access token used for GitLab API access |
-| `RESEND_API_KEY` | Resend API key used for transactional email delivery |
-| `RESEND_FROM` | Sender address used for application emails |
+| `BREVO_API_KEY` | Brevo API key used for transactional email delivery |
+| `BREVO_SENDER_EMAIL` | Verified sender email address used for application emails |
 | `FRONTEND_URL` | Frontend URL used when generating password-reset links |
 
 ### Email & Authentication
 
-The application uses Resend for transactional email delivery.
+The application uses Brevo for transactional email delivery.
 
 Email functionality includes:
 - Signup verification codes
 - Password reset emails
 - Password reset links
 
-For the current demo deployment, Resend is configured with a testing sender.
-The configured test recipient can receive signup verification and password-reset
-emails.
+For the live application, email delivery is configured through Brevo using a verified sender email address.
 
-For unrestricted email delivery to arbitrary user email addresses, a verified
-sending domain must be configured in Resend.
+For local development, configure:
+- `BREVO_API_KEY`
+- `BREVO_SENDER_EMAIL`
 
-### Demo Access
-
-Four verified demo accounts are provided for role-based evaluation:
-
-- Writer
-- Technical Reviewer
-- Documentation Lead
-- Admin
-
-The login credentials and live application URL are provided separately in the
-evaluator credentials file.
+For security, real API keys and credentials must not be committed to GitHub.
 
 ### Security
 
@@ -468,7 +457,7 @@ Keep real credentials only in `.env` or the deployment platform's secret manager
 - API keys
 - Database passwords
 - GitLab tokens
-- Resend API keys
+- Brevo API keys
 - Production `.env` files
 
 The `.env.example` file should contain variable names and safe placeholders only.
