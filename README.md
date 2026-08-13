@@ -363,16 +363,6 @@ Start the FastAPI backend from the `backend` directory:
 python3 -m uvicorn main:app --reload
 ```
 
-Once the server starts, you can access:
-
-| Service | Local URL |
-|---|---|
-| **Backend API** | [http://127.0.0.1:8000](http://127.0.0.1:8000) |
-| **Interactive API Docs** | [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) |
-
-> The API documentation is provided by FastAPI's interactive Swagger interface.
-
-
 ### 7. Start the Frontend
 
 Open a **new terminal** from the project root and start the frontend:
@@ -382,12 +372,6 @@ cd frontend
 npm install
 npm run dev
 ```
-
-Once the development server starts, you can access:
-
-| Service | Local URL |
-| --- | --- |
-| **Frontend Application** | [http://localhost:3000](http://localhost:3000) |
 
 > If the frontend dependencies have already been installed, you can skip `npm install` and run `npm run dev`.
 
@@ -412,7 +396,7 @@ FastAPI Backend
 
 Open the **frontend** to use the application.
 
-Use the **FastAPI documentation** to inspect and test the backend API endpoints directly.
+The FastAPI documentation can be used to inspect and test the backend API endpoints when running the project locally.
 
 ---
 
