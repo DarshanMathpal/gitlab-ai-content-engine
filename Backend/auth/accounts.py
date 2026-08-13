@@ -25,10 +25,10 @@ have.
 """
 
 import hashlib
+import os
 import re
 import secrets
-import smtplib
-from email.message import EmailMessage
+import resend
 from datetime import datetime, timedelta
 
 from fastapi import Depends, Header, HTTPException
@@ -43,6 +43,9 @@ PBKDF2_ITERATIONS = 260_000
 CODE_TTL_MINUTES = 15
 RESET_TOKEN_TTL_MINUTES = 15
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+RESEND_FROM = os.getenv("RESEND_FROM", "onboarding@resend.dev")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 
 
 def _hash(value: str, salt: str) -> str:
@@ -154,25 +157,33 @@ def verify_code(db: Session, email: str, code: str) -> str:
     return _create_session(db, email)
 
 def _send_reset_email(user_email: str, token: str):
-    # 1. Build the correct frontend URL
-    reset_link = f"http://localhost:3000/reset-password?token={token}"
-    
-    # 2. Format the email
-    msg = EmailMessage()
-    msg['Subject'] = "Reset Your Password"
-    msg['From'] = "gitlabproject000@gmail.com"
-    msg['To'] = user_email
-    msg.set_content(f"Please click this link to reset your password:\n\n{reset_link}")
-    
-    # 3. Send the email
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls() # Secure the connection
-            server.login("gitlabproject000@gmail.com", "oorq vntu berq duqc")
-            server.send_message(msg)
-        print(f"SUCCESS: Reset email sent to {user_email}")
-    except Exception as e:
-        print(f"FAILED to send email: {e}")
+    frontend_url = os.getenv(
+        "FRONTEND_URL",
+        "http://localhost:3000",
+    )
+
+    reset_link = f"{frontend_url}/reset-password?token={token}"
+
+    if not RESEND_API_KEY:
+        print(f"[DEV EMAIL] Password reset link for {user_email}: {reset_link}")
+        return
+
+    resend.api_key = RESEND_API_KEY
+
+    resend.Emails.send(
+        {
+            "from": RESEND_FROM,
+            "to": [user_email],
+            "subject": "Reset Your Password",
+            "text": (
+                "Please click the link below to reset your password:\n\n"
+                f"{reset_link}\n\n"
+                "This link expires in 15 minutes."
+            ),
+        }
+    )
+
+    print(f"SUCCESS: Reset email sent to {user_email}")
 
 
 def forgot_password(db: Session, email: str):
