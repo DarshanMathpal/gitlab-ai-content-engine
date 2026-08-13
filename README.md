@@ -343,7 +343,7 @@ Create a `.env` file from the provided example:
 cp .env.example .env
 ```
 
-Configure the required LLM, GitLab, SMTP, and database variables.
+Configure the required LLM, GitLab, email, and database variables.
 
 **Do not commit .env, API keys, passwords, or access tokens to GitHub.**
 
@@ -427,11 +427,18 @@ Create a local `.env` file using `.env.example`.
 | `DATABASE_URL` | PostgreSQL / Supabase connection URL |
 | `GITLAB_URL` | GitLab API base URL, for example `https://gitlab.com/api/v4` |
 | `GITLAB_TOKEN` | GitLab personal/project access token used for GitLab API access |
-| `SMTP_HOST` | SMTP server hostname, e.g. `smtp.gmail.com` |
-| `SMTP_PORT` | SMTP server port, e.g. `587` |
-| `SMTP_USERNAME` | SMTP account username |
-| `SMTP_PASSWORD` | SMTP account/app password |
-| `SMTP_FROM` | Sender address used for application emails |
+| `RESEND_API_KEY` | Resend API key used for transactional email delivery |
+| `RESEND_FROM` | Sender address used for application emails |
+| `FRONTEND_URL` | Frontend URL used when generating password-reset links |
+
+### Email & Authentication
+
+The application uses Resend for transactional email delivery.
+
+Email functionality includes:
+- Signup verification codes
+- Password reset emails
+- Password reset links
 
 ### Security
 
@@ -442,7 +449,7 @@ Keep real credentials only in `.env` or the deployment platform's secret manager
 - API keys
 - Database passwords
 - GitLab tokens
-- SMTP passwords
+- Resend API keys
 - Production `.env` files
 
 The `.env.example` file should contain variable names and safe placeholders only.
