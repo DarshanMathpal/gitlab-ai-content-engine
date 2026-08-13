@@ -440,6 +440,25 @@ Email functionality includes:
 - Password reset emails
 - Password reset links
 
+For the current demo deployment, Resend is configured with a testing sender.
+The configured test recipient can receive signup verification and password-reset
+emails.
+
+For unrestricted email delivery to arbitrary user email addresses, a verified
+sending domain must be configured in Resend.
+
+### Demo Access
+
+Four verified demo accounts are provided for role-based evaluation:
+
+- Writer
+- Technical Reviewer
+- Documentation Lead
+- Admin
+
+The login credentials and live application URL are provided separately in the
+evaluator credentials file.
+
 ### Security
 
 Keep real credentials only in `.env` or the deployment platform's secret manager.
