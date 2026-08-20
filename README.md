@@ -1,4 +1,4 @@
-#  <img src="https://cdn.simpleicons.org/gitlab" width="18" height="18"> GitLab AI Content & Documentation Engine
+#  <img src="https://cdn.simpleicons.org/gitlab" width="20" height="20"> GitLab AI Content & Documentation Engine
 
 > Turn technical changes into source-grounded, review-ready documentation with a multi-agent AI workflow.
 
