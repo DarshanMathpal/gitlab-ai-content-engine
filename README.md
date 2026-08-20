@@ -1,4 +1,4 @@
-# <img width="148" height="148" alt="image" src="https://github.com/user-attachments/assets/12c94b61-2983-477a-ab9f-8ca34ed3acdb" /> GitLab AI Content & Documentation Engine
+#  GitLab AI Content & Documentation Engine
 
 > Turn technical changes into source-grounded, review-ready documentation with a multi-agent AI workflow.
 
