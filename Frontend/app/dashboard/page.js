@@ -203,35 +203,72 @@ export default function DashboardPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function loadDashboard(authData) {
-    setLoading(true);
-    setError("");
+async function loadDashboard(authData) {
+  setLoading(true);
+  setError("");
 
-    try {
-      const headers = { Authorization: `Bearer ${authData.token}` };
+  const headers = {
+    Authorization: `Bearer ${authData.token}`,
+  };
 
-      const jobsRes = await fetch(`${API_BASE}/api/content-jobs`, { headers });
-      if (!jobsRes.ok) throw new Error(`Failed to load jobs (${jobsRes.status})`);
-      setJobs(await jobsRes.json());
+  const requests = [
+    {
+      name: "jobs",
+      url: "/api/content-jobs",
+      update: setJobs,
+    },
+  ];
 
-      const metricsRes = await fetch(`${API_BASE}/api/metrics`, { headers });
-      if (metricsRes.ok) setMetrics(await metricsRes.json());
-
-      // Admin-only extra data 
-      if (authData.role === "admin") {
-        const usersRes = await fetch(`${API_BASE}/api/admin/users`, { headers });
-        if (usersRes.ok) setUsers(await usersRes.json());
-
-        const logsRes = await fetch(`${API_BASE}/api/admin/logs?limit=50`, { headers });
-        if (logsRes.ok) setLogs(await logsRes.json());
+  // Only the admin dashboard uses these datasets.
+  if (authData.role === "admin") {
+    requests.push(
+      {
+        name: "metrics",
+        url: "/api/metrics",
+        update: setMetrics,
+      },
+      {
+        name: "users",
+        url: "/api/admin/users",
+        update: setUsers,
+      },
+      {
+        name: "activity logs",
+        url: "/api/admin/logs?limit=50",
+        update: setLogs,
       }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    );
   }
 
+  try {
+    const results = await Promise.allSettled(
+      requests.map(async ({ name, url, update }) => {
+        const response = await fetch(`${API_BASE}${url}`, {
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to load ${name} (${response.status})`
+          );
+        }
+
+        const data = await response.json();
+        update(data);
+      })
+    );
+
+    const errors = results
+      .filter((result) => result.status === "rejected")
+      .map((result) => result.reason.message);
+
+    if (errors.length > 0) {
+      setError(errors.join(". "));
+    }
+  } finally {
+    setLoading(false);
+  }
+}
   function logout() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     window.location.href = "/login";
