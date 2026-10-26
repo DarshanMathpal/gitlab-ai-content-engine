@@ -157,7 +157,7 @@ export default function LoginPage() {
           setError(message);
         }
 
-        throw new Error(message);
+        return;
       }
 
       localStorage.setItem(
