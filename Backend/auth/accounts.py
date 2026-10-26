@@ -270,13 +270,17 @@ def reset_password(
 
 
 def _create_session(db: Session, email: str) -> str:
-    session = SessionTokenDB(token=secrets.token_urlsafe(32), email=email)
+    token = secrets.token_urlsafe(32)
+
+    session = SessionTokenDB(
+        token=token,
+        email=email,
+    )
+
     db.add(session)
     db.commit()
 
-    print("TOKEN SAVED:", session.token)
-
-    return session.token
+    return token
 
 
 def login(db: Session, email: str, password: str) -> str:
@@ -325,14 +329,7 @@ def get_current_user(
 
     token = authorization.removeprefix("Bearer ").strip()
 
-    # 👇 ADD THESE PRINTS
-    print("====================================")
-    print("TOKEN RECEIVED:", token)
-
     session = db.get(SessionTokenDB, token)
-
-    print("SESSION FOUND:", session)
-    print("====================================")
 
     if session is None:
         raise HTTPException(
