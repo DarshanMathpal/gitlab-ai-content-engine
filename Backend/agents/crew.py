@@ -38,17 +38,19 @@ load_dotenv()
 
 
 def get_llm() -> LLM:
-    """
-    Central place to configure which LLM the whole system uses.
-    Change the model name here and every agent updates automatically.
-    Using Gemini's free tier is a good default for a student project.
-    """
-    return LLM(
-        model="gemini/gemini-flash-latest",
-        api_key=os.getenv("GEMINI_API_KEY"),
-        temperature=0.4,
-    )
+    api_key = os.getenv("DEEPSEEK_API_KEY")
 
+    if not api_key:
+        raise RuntimeError("DEEPSEEK_API_KEY is missing")
+
+    return LLM(
+        model="openai/deepseek-flash",
+        api_key=api_key,
+        base_url="https://api.deepseek.com",
+        temperature=0.4,
+        extra_body={
+            "thinking": {"type": "disabled"},},
+    )
 
 def build_agents() -> dict:
     llm = get_llm()

@@ -157,9 +157,8 @@ export default function GeneratePreviewPage({ params }) {
 
       const generatedId = updatedJob?.job_id || jobId;
 
-      setTimeout(() => {
-        router.push(`/drafts/${generatedId}`);
-      }, 1200);
+      router.push(`/drafts/${generatedId}`);
+      
     } catch (err) {
       setError(err.message);
     } finally {
@@ -231,7 +230,7 @@ export default function GeneratePreviewPage({ params }) {
                   className="inline-flex items-center gap-3 rounded-xl bg-green-600 hover:bg-green-700 text-white px-8 py-3 font-semibold shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {generatingDraft
-                    ? "Running AI agents... (this can take up to a minute)"
+                    ? "Creating your draft..."
                     : "Confirm & Generate Draft with AI"}
                 </button>
               </div>

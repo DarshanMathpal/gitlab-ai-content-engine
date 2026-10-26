@@ -127,3 +127,15 @@ def list_users(db: Session) -> list[UserDB]:
     password hash/salt to the API layer, only this ORM object; main.py's
     response model strips those fields before they reach the client)."""
     return db.query(UserDB).order_by(UserDB.created_at.desc()).all()
+
+
+def list_jobs_with_reviews(db: Session) -> list[ContentJobDB]:
+    """Fetch jobs and batch-load their reviews."""
+    from sqlalchemy.orm import selectinload
+
+    return (
+        db.query(ContentJobDB)
+        .options(selectinload(ContentJobDB.reviews))
+        .order_by(ContentJobDB.created_at.desc())
+        .all()
+    )

@@ -97,6 +97,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def measure_request_time(request, call_next):
+    from time import perf_counter
+
+    started = perf_counter()
+
+    response = await call_next(request)
+
+    elapsed_ms = (perf_counter() - started) * 1000
+
+    print(
+        f"[PERF] {request.method} {request.url.path} "
+        f"status={response.status_code} "
+        f"time={elapsed_ms:.1f}ms",
+        flush=True,
+    )
+
+    response.headers["Server-Timing"] = (
+        f"app;dur={elapsed_ms:.1f}"
+    )
+
+    return response
 
 @app.on_event("startup")
 def on_startup():
@@ -211,7 +233,7 @@ def get_all_jobs(db: Session = Depends(get_db)):
     Everyone can see everyone's jobs (reviewers need this); edit/delete
     is still restricted to the owner (see below)."""
 
-    jobs = crud.list_jobs(db)
+    jobs = crud.list_jobs_with_reviews(db)
 
     # NEW: mark jobs that a Technical Reviewer / Doc Lead sent back with
     # "request_revision". Those jobs land back in "drafting" status —
@@ -220,7 +242,7 @@ def get_all_jobs(db: Session = Depends(get_db)):
     enriched = []
     for job in jobs:
         item = ContentJobResponse.model_validate(job)
-        reviews = crud.list_review_actions(db, job.job_id)
+        reviews = sorted(job.reviews, key=lambda review: (review.created_at, review.id))
         last_status_review = next(
             (r for r in reversed(reviews) if r.action != "comment"),
             None,

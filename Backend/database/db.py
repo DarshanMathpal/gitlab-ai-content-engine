@@ -1,47 +1,49 @@
-"""
-database/db.py
----------------
-This file sets up the connection to your Supabase (PostgreSQL) database.
-
-WHAT IS SUPABASE?
-Supabase is a free, hosted PostgreSQL database. Instead of installing
-Postgres on your own laptop, Supabase runs it in the cloud and gives you
-a connection string. Every teammate's backend connects to the SAME
-database, so everyone sees the same jobs, drafts, and reviews.
-
-HOW TO GET YOUR CONNECTION STRING (do this once):
-1. Go to https://supabase.com and sign up (free)
-2. Click "New Project" -> give it a name -> set a database password
-   (SAVE this password somewhere safe) -> choose a region -> Create
-3. Wait ~2 minutes for the project to finish setting up
-4. In the left sidebar, click the gear icon "Project Settings" -> "Database"
-5. Under "Connection string", choose the "URI" tab and copy it.
-   It looks like:
-   postgresql://postgres:[YOUR-PASSWORD]@db.xxxxxxxxxxxx.supabase.co:5432/postgres
-6. Replace [YOUR-PASSWORD] with the database password you set in step 2
-7. Paste this whole string into backend/.env as DATABASE_URL
-"""
+"""Database connection and request-scoped sessions."""
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-load_dotenv()
+# Load Backend/.env regardless of where the command is run.
+ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
+load_dotenv(ENV_PATH)
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
     raise RuntimeError(
-        "DATABASE_URL is not set. Copy backend/.env.example to backend/.env "
-        "and paste your Supabase connection string into DATABASE_URL."
+        "DATABASE_URL is not set. Add it to Backend/.env "
+        "or your hosting environment variables."
     )
 
-# pool_pre_ping avoids "connection closed" errors after the DB has been idle
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine_options = {
+    "pool_pre_ping": True,
+}
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+if DATABASE_URL.startswith(("postgresql", "postgres")):
+    engine_options.update(
+        pool_size=int(os.getenv("DB_POOL_SIZE", "5")),
+        max_overflow=int(os.getenv("DB_MAX_OVERFLOW", "5")),
+        pool_timeout=int(os.getenv("DB_POOL_TIMEOUT", "10")),
+        pool_recycle=int(os.getenv("DB_POOL_RECYCLE", "1800")),
+        connect_args={
+            "connect_timeout": int(
+                os.getenv("DB_CONNECT_TIMEOUT", "10")
+            ),
+        },
+    )
+
+engine = create_engine(DATABASE_URL, **engine_options)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    expire_on_commit=False,
+    bind=engine,
+)
 
 
 class Base(DeclarativeBase):
@@ -49,10 +51,7 @@ class Base(DeclarativeBase):
 
 
 def get_db():
-    """
-    FastAPI dependency: gives each request its own database session,
-    and always closes it afterward — even if an error happens.
-    """
+    """Give each request its own session and close it afterward."""
     db = SessionLocal()
     try:
         yield db
@@ -61,11 +60,7 @@ def get_db():
 
 
 def init_db():
-    """
-    Creates all tables defined in database/models_db.py if they don't
-    already exist. Safe to run every time the app starts — it will not
-    delete or overwrite existing tables/data.
-    """
-    from database import models_db  # noqa: F401 (import so tables register)
+    """Create missing tables without deleting existing records."""
+    from database import models_db  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
