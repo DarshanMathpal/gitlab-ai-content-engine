@@ -177,6 +177,33 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
     log_event("login", created_by=user.email)
     return AuthResponse(token=token, email=user.email, role=user.role)
 
+@app.post("/api/auth/demo", response_model=AuthResponse)
+def demo_login(db: Session = Depends(get_db)):
+    email = os.getenv("DEMO_ADMIN_EMAIL", "").strip().lower()
+    password = os.getenv("DEMO_ADMIN_PASSWORD", "")
+
+    if not email or not password:
+        raise HTTPException(
+            status_code=503,
+            detail="Demo access is not configured.",
+        )
+
+    user = db.get(accounts.UserDB, email)
+
+    if user is None or user.role != Role.admin.value:
+        raise HTTPException(
+            status_code=503,
+            detail="Demo admin account is unavailable.",
+        )
+
+    role = user.role
+    token = accounts.login(db, email, password)
+
+    return AuthResponse(
+        token=token,
+        email=email,
+        role=role,
+    )
 
 @app.post("/api/auth/logout")
 def logout(authorization: str = Header(...), db: Session = Depends(get_db)):
