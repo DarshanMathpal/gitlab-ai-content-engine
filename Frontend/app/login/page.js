@@ -73,6 +73,7 @@ function isUserNotFoundError(status, message) {
 
 export default function LoginPage() {
   const router = useRouter();
+  const [demoLoading, setDemoLoading] = useState(false);
 
   // ================= PASSWORD =================
 
@@ -180,7 +181,41 @@ export default function LoginPage() {
       setLoading(false);
     }
   }
+  
+    async function handleDemoLogin() {
+    setDemoLoading(true);
+    setError("");
+    setUserNotFound(false);
 
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/demo`, {
+        method: "POST",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          extractErrorMessage(data, "Demo login failed")
+        );
+      }
+
+      localStorage.setItem(
+        AUTH_STORAGE_KEY,
+        JSON.stringify({
+          token: data.token,
+          email: data.email,
+          role: data.role,
+        })
+      );
+
+      router.replace("/dashboard");
+    } catch (err) {
+      setError(err.message || "Demo login failed");
+    } finally {
+      setDemoLoading(false);
+    }
+  }
   return (
     <div className="min-h-screen flex bg-gray-50">
 
@@ -440,7 +475,7 @@ export default function LoginPage() {
 
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || demoLoading}
                 className="group w-full bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-3 shadow-lg shadow-orange-200 transition-all duration-300 hover:-translate-y-0.5"
               >
 
@@ -455,6 +490,14 @@ export default function LoginPage() {
 
               </button>
 
+              <button
+                type="button"
+                onClick={handleDemoLogin}
+                disabled={loading || demoLoading}
+                className="w-full rounded-xl border border-orange-600 px-4 py-3.5 font-semibold text-orange-600 hover:bg-orange-50 transition disabled:opacity-50"
+              >
+                {demoLoading ? "Opening Demo..." : "Try Admin Demo"}
+              </button>
             </form>
 
             {/* Divider */}
