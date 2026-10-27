@@ -31,7 +31,6 @@ from fastapi import (
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from agents.crew import run_content_workflow
 from auth import accounts
 from auth.accounts import get_current_user, require_role
 from auth.roles import CurrentUser, Role
@@ -453,6 +452,8 @@ def run_agent_workflow(
 
         {context["knowledge"]}
         """
+
+        from agents.crew import run_content_workflow
 
         result = run_content_workflow(
     content_type=job.content_type,
@@ -1328,10 +1329,49 @@ def get_gitlab_merge_requests(
     return gitlab_service.get_merge_requests(project_id)
 
 @app.post("/api/upload-document")
-async def upload_document(file: UploadFile = File(...)):
+def upload_document(
+    file: UploadFile = File(...),
+    user: CurrentUser = Depends(require_role(Role.writer, Role.admin)),
+):
+    from pypdf import PdfReader
+
+    filename = file.filename or ""
+    extension = os.path.splitext(filename)[1].lower()
+
+    try:
+        if extension == ".pdf":
+            reader = PdfReader(file.file)
+            text = "\n\n".join(
+                page.extract_text() or ""
+                for page in reader.pages
+            )
+        elif extension in {".txt", ".md"}:
+            text = file.file.read().decode("utf-8-sig")
+        else:
+            raise HTTPException(
+                status_code=400,
+                detail="Please upload a PDF, TXT, or Markdown file.",
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail="Could not read this document. Try another file.",
+        )
+
+    text = text.strip()
+
+    if not text:
+        raise HTTPException(
+            status_code=400,
+            detail="No readable text found. Scanned PDFs require OCR.",
+        )
+
     return {
-        "filename": file.filename,
-        "content_type": file.content_type
+        "filename": filename,
+        "text": text,
+        "character_count": len(text),
     }
 
 

@@ -12,3 +12,4 @@ python-multipart==0.0.6
 requests
 uvloop==0.21.0 ; sys_platform != "win32"
 sib-api-v3-sdk
+pypdf
