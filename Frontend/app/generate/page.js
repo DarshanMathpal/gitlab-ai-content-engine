@@ -83,18 +83,39 @@ export default function GeneratePage() {
   throw new Error("Please enter GitLab Project ID.");
 }
 
-      if (uploadedFile) {
+let jobSourceText = "";
+
+      if (selectedOption === "manual") {
+        jobSourceText = sourceText.trim();
+      } else if (selectedOption === "gitlab") {
+        jobSourceText = "Generate documentation from GitLab repository.";
+      } else {
+        if (!uploadedFile) {
+          throw new Error("Please select a document.");
+        }
+
         const formData = new FormData();
         formData.append("file", uploadedFile);
 
         const uploadRes = await fetch(`${API_BASE}/api/upload-document`, {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${authData.token}`,
+          },
           body: formData,
         });
 
+        const uploaded = await uploadRes.json().catch(() => ({}));
+
         if (!uploadRes.ok) {
-          throw new Error("File upload failed.");
+          throw new Error(uploaded.detail || "File upload failed.");
         }
+
+        jobSourceText = uploaded.text?.trim() || "";
+      }
+
+      if (!jobSourceText) {
+        throw new Error("Please provide readable source text.");
       }
 
       const res = await fetch(`${API_BASE}/api/content-jobs`, {
@@ -109,12 +130,7 @@ export default function GeneratePage() {
   target_channel: targetChannel,
   title_hint: titleHint || null,
 
-  source_text:
-    selectedOption === "manual"
-      ? sourceText
-      : selectedOption === "gitlab"
-      ? "Generate documentation from GitLab repository."
-      : "Document uploaded",
+  source_text: jobSourceText,
 
   gitlab_project_id:
     selectedOption === "gitlab"
@@ -132,6 +148,7 @@ export default function GeneratePage() {
       router.push(`/generate/preview/${job.job_id}`);
     } catch (err) {
       setError(err.message);
+    } finally {  
       setLoading(false);
     }
   }
